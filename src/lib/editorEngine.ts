@@ -186,8 +186,8 @@ export function planAutoEdit(
         : (['brightness', 'contrast', 'saturate'] as Effect['type'][]);
 
     templateEffectsToUse.forEach((effectType) => {
-      const defaultParams: Record<string, number | string> = {
-        brightess: { value: 1.0 },
+      const defaultParams = {
+        brightness: { value: 1.0 },
         contrast: { value: 1.0 },
         saturate: { value: 1.2 },
         blur: { value: 0 },
@@ -195,7 +195,7 @@ export function planAutoEdit(
         grayscale: { value: 0 },
         sepia: { value: 0 },
         vignette: { value: 0.3 },
-      };
+      } as const;
 
       effects.push({
         id: crypto.randomUUID(),
@@ -203,7 +203,7 @@ export function planAutoEdit(
         clipId: clip.id,
         startTime: clip.startTime,
         endTime: clip.endTime,
-        params: defaultParams[effectType] || { value: 1.0 },
+        params: (defaultParams[effectType] || { value: 1.0 }) as any,
       });
     });
   });
