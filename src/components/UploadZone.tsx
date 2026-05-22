@@ -1,7 +1,6 @@
 'use client';
 
 import { useState, useRef, useCallback } from 'react';
-import { Upload, FileVideo, X, Loader2 } from 'lucide-react';
 
 interface UploadZoneProps {
   onFilesSelected: (files: FileList) => void;
@@ -38,9 +37,7 @@ export default function UploadZone({ onFilesSelected, uploading }: UploadZonePro
     }
   }, [onFilesSelected]);
 
-  const handleClick = () => {
-    inputRef.current?.click();
-  };
+  const handleClick = () => inputRef.current?.click();
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files.length > 0) {
@@ -73,37 +70,17 @@ export default function UploadZone({ onFilesSelected, uploading }: UploadZonePro
         onChange={handleChange}
         className="hidden"
       />
-
       <div className="flex flex-col items-center gap-4 text-center">
-        {uploading ? (
-          <>
-            <div className="relative">
-              <Loader2 className="w-16 h-16 text-violet-400 animate-spin" />
-            </div>
-            <div>
-              <p className="text-lg font-medium text-zinc-200">جاري رفع الملفات...</p>
-              <p className="text-sm text-zinc-500 mt-1">برجاء الانتظار</p>
-            </div>
-          </>
-        ) : (
-          <>
-            <div className="relative">
-              <div className={`absolute inset-0 bg-violet-500/20 rounded-full blur-xl transition-opacity duration-300 ${isDragOver ? 'opacity-100' : 'opacity-0'}`} />
-              <Upload className={`w-16 h-16 relative transition-colors duration-300 ${isDragOver ? 'text-violet-400' : 'text-zinc-500'}`} />
-            </div>
-            <div>
-              <p className="text-xl font-semibold text-zinc-200">
-                {isDragOver ? 'افلت الملفات هنا' : 'اسحب وأفلت الفيديوهات هنا'}
-              </p>
-              <p className="text-sm text-zinc-500 mt-2">
-                أو اضغط لاختيار الملفات
-              </p>
-              <p className="text-xs text-zinc-600 mt-3">
-                MP4, MOV, AVI, MKV, WebM · MP3, WAV, AAC
-              </p>
-            </div>
-          </>
-        )}
+        <svg className="w-16 h-16 text-zinc-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12" />
+        </svg>
+        <div>
+          <p className="text-xl font-semibold text-zinc-200">
+            {isDragOver ? 'افلت الملفات هنا' : 'اسحب وأفلت الفيديوهات هنا'}
+          </p>
+          <p className="text-sm text-zinc-500 mt-2">أو اضغط لاختيار الملفات</p>
+          <p className="text-xs text-zinc-600 mt-3">MP4, MOV, AVI, WebM · MP3, WAV, AAC</p>
+        </div>
       </div>
     </div>
   );
