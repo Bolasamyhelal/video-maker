@@ -5,7 +5,7 @@ export async function renderMontage(
   if (clips.length === 0) throw new Error('No clips');
 
   try {
-    const { default: FFmpeg } = await import('@ffmpeg/ffmpeg');
+    const { FFmpeg } = await import('@ffmpeg/ffmpeg');
     const { toBlobURL } = await import('@ffmpeg/util');
 
     const ffmpeg = new FFmpeg();
