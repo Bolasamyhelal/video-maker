@@ -66,7 +66,7 @@ export async function concatVideos(
   ]);
 
   const raw = await ffmpeg.readFile('output.mp4');
-  return new Uint8Array(raw.buffer);
+  return new Uint8Array(raw.slice(0));
 }
 
 export async function trimVideo(
@@ -93,7 +93,7 @@ export async function trimVideo(
   ]);
 
   const raw = await ffmpeg.readFile('trimmed.mp4');
-  return new Uint8Array(raw.buffer);
+  return raw.slice(0);
 }
 
 export async function applyEffects(
@@ -138,7 +138,7 @@ export async function applyEffects(
   }
 
   const raw = await ffmpeg.readFile('effected.mp4');
-  return new Uint8Array(raw.buffer);
+  return raw.slice(0);
 }
 
 export async function renderMontage(
@@ -194,5 +194,5 @@ export async function renderMontage(
   ]);
 
   const raw = await ffmpeg.readFile('final.mp4');
-  return new Uint8Array(raw.buffer);
+  return raw.slice(0);
 }
