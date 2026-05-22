@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Clapperboard, Github, Sparkles } from 'lucide-react';
+import { Clapperboard, Sparkles } from 'lucide-react';
 
 export default function Header() {
   return (

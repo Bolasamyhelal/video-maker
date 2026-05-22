@@ -2,7 +2,7 @@ import Header from '@/components/Header';
 import Link from 'next/link';
 import {
   Sparkles, Wand2, Zap, Shield, Film, Music,
-  Scissors, Layers, Download, ArrowLeft,
+  Scissors, Layers, Download,
 } from 'lucide-react';
 
 const features = [
