@@ -9,6 +9,7 @@ interface ExportDialogProps {
   onExport: (options: ExportOptions) => void;
   isExporting: boolean;
   progress: number;
+  message?: string;
 }
 
 export interface ExportOptions {
@@ -19,7 +20,7 @@ export interface ExportOptions {
   watermarkText: string;
 }
 
-export default function ExportDialog({ isOpen, onClose, onExport, isExporting, progress }: ExportDialogProps) {
+export default function ExportDialog({ isOpen, onClose, onExport, isExporting, progress, message = '' }: ExportDialogProps) {
   const [options, setOptions] = useState<ExportOptions>({
     resolution: '1080p',
     fps: 30,
@@ -143,7 +144,8 @@ export default function ExportDialog({ isOpen, onClose, onExport, isExporting, p
           </button>
 
           {isExporting && (
-            <div className="mt-4">
+            <div className="mt-4 space-y-2">
+              {message && <p className="text-sm text-zinc-400 text-center">{message}</p>}
               <div className="h-2 bg-zinc-800 rounded-full overflow-hidden">
                 <div
                   className="h-full bg-gradient-to-r from-violet-500 to-purple-500 rounded-full transition-all duration-300"
