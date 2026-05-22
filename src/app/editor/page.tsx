@@ -135,7 +135,8 @@ export default function EditorPage() {
 
       setExportProgress(100);
 
-      const blob = new Blob([result as unknown as BlobPart], { type: 'video/mp4' });
+      // @ts-ignore - Blob type compatibility
+      const blob = new Blob([result], { type: 'video/mp4' });
       const dlUrl = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = dlUrl;
