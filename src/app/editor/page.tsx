@@ -129,15 +129,12 @@ export default function EditorPage() {
 
       const clipData = await Promise.all(readPromises);
 
-      const result = await renderMontage(clipData, (pct) => {
+      const dlUrl = await renderMontage(clipData, (pct) => {
         setExportProgress(pct);
       });
 
       setExportProgress(100);
 
-      // @ts-ignore - Blob type compatibility
-      const blob = new Blob([result], { type: 'video/mp4' });
-      const dlUrl = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = dlUrl;
       a.download = `montage_${selectedTemplate}.mp4`;

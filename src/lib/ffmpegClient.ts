@@ -144,7 +144,7 @@ export async function applyEffects(
 export async function renderMontage(
   clips: { file: Uint8Array; name: string; start: number; end: number; speed: number }[],
   onProgress?: (pct: number) => void
-): Promise<Uint8Array> {
+): Promise<string> {
   const ffmpeg = await getFFmpeg();
 
   for (let i = 0; i < clips.length; i++) {
@@ -194,5 +194,8 @@ export async function renderMontage(
   ]);
 
   const raw = await ffmpeg.readFile('final.mp4');
-  return raw.slice(0);
+  const arr = new Uint8Array((raw as any).buffer || raw);
+  const blob = new Blob([arr], { type: 'video/mp4' });
+  const url = URL.createObjectURL(blob);
+  return url;
 }
