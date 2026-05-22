@@ -1,5 +1,5 @@
 import { FFmpeg } from '@ffmpeg/ffmpeg';
-import { fetchFile, toBlobURL } from '@ffmpeg/util';
+import { toBlobURL } from '@ffmpeg/util';
 
 let ffmpegInstance: FFmpeg | null = null;
 let loaded = false;
@@ -65,8 +65,8 @@ export async function concatVideos(
     'output.mp4',
   ]);
 
-  const data = await ffmpeg.readFile('output.mp4');
-  return data;
+  const raw = await ffmpeg.readFile('output.mp4');
+  return new Uint8Array(raw.buffer);
 }
 
 export async function trimVideo(
@@ -92,8 +92,8 @@ export async function trimVideo(
     'trimmed.mp4',
   ]);
 
-  const data = await ffmpeg.readFile('trimmed.mp4');
-  return data;
+  const raw = await ffmpeg.readFile('trimmed.mp4');
+  return new Uint8Array(raw.buffer);
 }
 
 export async function applyEffects(
@@ -137,8 +137,8 @@ export async function applyEffects(
     ]);
   }
 
-  const data = await ffmpeg.readFile('effected.mp4');
-  return data;
+  const raw = await ffmpeg.readFile('effected.mp4');
+  return new Uint8Array(raw.buffer);
 }
 
 export async function renderMontage(
@@ -193,6 +193,6 @@ export async function renderMontage(
     'final.mp4',
   ]);
 
-  const data = await ffmpeg.readFile('final.mp4');
-  return data;
+  const raw = await ffmpeg.readFile('final.mp4');
+  return new Uint8Array(raw.buffer);
 }
